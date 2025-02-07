@@ -2,8 +2,7 @@ name: CI
 
 on:
   pull_request:
-    types:
-      - opened
+    types: [opened, synchronize]
 
 jobs:
   build:
@@ -19,6 +18,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install --frozen-lockfile
+
+      - name: Install prettier
+        run: npm install --save-dev prettier
 
       - name: Run Lint
         run: npm run lint
