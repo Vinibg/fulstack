@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  build:
+    name: Continuouns Integration
+    runs-on: ubuntu-lastet
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 15
+
+      - name: Install dependencies
+        run: npm install --frozen-lockfile
+
+      - name: Run Lint
+        run: npm run lint
+
+      - name: Run Printter
+        run: npm run prettier
+
+      - name: Run Test
+        run: npm run test
+
+      - name: Run Build
+        run: npm run build
